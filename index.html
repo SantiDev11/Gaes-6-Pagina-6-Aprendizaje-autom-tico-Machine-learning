@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#00324D">
+  <meta name="description"
+    content="Guía Interactiva de Aprendizaje sobre Machine Learning - Componente Formativo SENA ADSO (Análisis y Desarrollo de Software) - GAES 6">
+  <title>Machine Learning · Componente Formativo SENA ADSO | GAES 6</title>
+
+  <!-- Favicon institucional SENA -->
+  <link rel="icon" type="image/png" sizes="64x64" href="img/favicon-sena.png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+
+  <!-- Tipografía Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+
+  <!-- Hoja de Estilos Modularizada -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Scripts Modularizados (defer) -->
+  <script src="js/main.js" defer></script>
+  <script src="js/hero-network.js" defer></script>
+  <script src="js/kmeans-demo.js" defer></script>
+  <script src="js/confusion-matrix.js" defer></script>
+  <script src="js/presentation-mode.js" defer></script>
+</head>
+
+<body>
+
+  <!-- Accesibilidad: Saltar al contenido principal -->
+  <a href="#contenido-principal" class="skip-to-content">Saltar al contenido principal</a>
+
+  <!-- Barra de progreso de lectura interactiva -->
+  <div class="reading-progress-bar" id="readingProgressBar" aria-hidden="true"></div>
+
+  <!-- ======================================================================
+       HEADER INSTITUCIONAL SENA
+       ====================================================================== -->
+  <header class="site-header">
+    <!-- Topbar institucional -->
+    <div class="header-topbar">
+      <div class="header-topbar-left">
+        <span class="badge-adso">ADSO</span>
+        <span>Programa: Análisis y Desarrollo de Software · SENA</span>
+      </div>
+      <div class="header-topbar-right">
+        <span>Componente Formativo Oficial 6</span>
+        <span>•</span>
+        <span>GAES 6</span>
+      </div>
+    </div>
+
+    <!-- Barra de Navegación Principal -->
+    <div class="nav-container">
+      <a href="#portada" class="brand-area" aria-label="Inicio - Machine Learning SENA">
+        <img src="img/logo-sena.png" alt="Logo SENA" class="brand-logo-img" onerror="this.style.display='none'">
+        <div class="brand-titles">
+          <div class="brand-title-main">Machine <span>Learning</span></div>
+          <div class="brand-subtitle">Tecnólogo en Análisis y Desarrollo de Software</div>
+        </div>
+      </a>
+
+      <!-- Botón menú móvil -->
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú de navegación" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+
+      <!-- Menú Semántico -->
+      <nav class="main-nav" id="mainNav" aria-label="Navegación temática del componente">
+        <ul class="nav-links">
+          <li><a href="#modulo-fundamentos" class="nav-link">Fundamentos</a></li>
+          <li><a href="#modulo-algoritmos" class="nav-link">Algoritmos</a></li>
+          <li><a href="#modulo-herramientas" class="nav-link">Herramientas</a></li>
+          <li><a href="#modulo-clustering" class="nav-link">Clustering</a></li>
+          <li><a href="#modulo-evaluacion" class="nav-link">Evaluación</a></li>
+          <li><a href="#modulo-autoevaluacion" class="nav-link nav-cta">Autoevaluación</a></li>
+          <li>
+            <button type="button" class="nav-link nav-present" data-present-toggle aria-pressed="false"
+              title="Modo presentación (tecla P)">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect width="20" height="14" x="2" y="3" rx="2" />
+                <path d="M12 17v4M8 21h8" />
+              </svg>
+              Presentar
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ======================================================================
+       ESTRUCTURA PRINCIPAL TIPO DASHBOARD (ASIDE + MAIN)
+       ====================================================================== -->
+  <div class="dashboard-layout" id="contenido-principal">
+
+    <!-- ASIDE: Panel de navegación rápida y control pedagógico -->
+    <aside class="dashboard-sidebar" aria-label="Panel de navegación rápida">
+      <div class="sidebar-widget">
+        <h3 class="sidebar-widget-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z" />
+          </svg>
+          Módulos Formativos
+        </h3>
+        <ul class="toc-list">
+          <li class="toc-item">
+            <a href="#modulo-fundamentos">
+              <span class="toc-badge">1</span>
+              <span>Concepto y Tipos</span>
+            </a>
+          </li>
+          <li class="toc-item">
+            <a href="#modulo-algoritmos">
+              <span class="toc-badge">2</span>
+              <span>Principales Algoritmos</span>
+            </a>
+          </li>
+          <li class="toc-item">
+            <a href="#modulo-herramientas">
+              <span class="toc-badge">3</span>
+              <span>Herramientas Analítica</span>
+            </a>
+          </li>
+          <li class="toc-item">
+            <a href="#modulo-clustering">
+              <span class="toc-badge">4</span>
+              <span>Clustering y Datos</span>
+            </a>
+          </li>
+          <li class="toc-item">
+            <a href="#modulo-evaluacion">
+              <span class="toc-badge">5</span>
+              <span>Evaluación y Validación</span>
+            </a>
+          </li>
+          <li class="toc-item">
+            <a href="#modulo-autoevaluacion">
+              <span class="toc-badge">✓</span>
+              <span>Quiz Interactivo</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar-widget">
+        <div class="sidebar-card-info">
+          <h4>Guía Técnica SENA</h4>
+          <p>Material estructurado para asimilar los principios, algoritmos y técnicas de evaluación de Machine Learning
+            en software moderno.</p>
+          <a href="#modulo-autoevaluacion" class="btn-aside-action">Iniciar Quiz de Repaso</a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN: Contenido técnico oficial estructurado en artículos -->
+    <main class="dashboard-content">
+
+      <!-- HERO BANNER INSTITUCIONAL -->
+      <article class="hero-banner" id="portada">
+        <!-- Fondo animado: red neuronal que propaga señales (js/hero-network.js) -->
+        <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
+        <div class="hero-meta-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" />
+            <path d="m9 12 2 2 4-4" />
+          </svg>
+          SENA ADSO · Componente 6
+        </div>
+        <h1 class="hero-title">Aprende <span class="scramble" data-scramble>Machine Learning</span> con el SENA</h1>
+        <p class="hero-description">
+          Portal educativo e interactivo diseñado para aprendices del programa de Análisis y Desarrollo de Software.
+          Explora conceptos oficiales, taxonomía de algoritmos, herramientas de analítica, clustering y métricas de
+          validación.
+        </p>
+        <div class="hero-actions">
+          <a href="#modulo-fundamentos" class="hero-btn hero-btn-primary">Explorar los módulos</a>
+          <button type="button" class="hero-btn hero-btn-ghost" data-present-toggle aria-pressed="false">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect width="20" height="14" x="2" y="3" rx="2" />
+              <path d="M12 17v4M8 21h8" />
+            </svg>
+            Modo presentación <kbd>P</kbd>
+          </button>
+        </div>
+        <div class="hero-stats-grid">
+          <div class="hero-stat-card">
+            <div class="hero-stat-number" data-count="5">5</div>
+            <div class="hero-stat-label">Características Clave</div>
+          </div>
+          <div class="hero-stat-card">
+            <div class="hero-stat-number" data-count="4">4</div>
+            <div class="hero-stat-label">Tipos de Aprendizaje</div>
+          </div>
+          <div class="hero-stat-card">
+            <div class="hero-stat-number" data-count="14">14</div>
+            <div class="hero-stat-label">Algoritmos Oficiales</div>
+          </div>
+          <div class="hero-stat-card">
+            <div class="hero-stat-number" data-count="6">6</div>
+            <div class="hero-stat-label">Métricas de Evaluación</div>
+          </div>
+        </div>
+        <p class="hero-hint">Toca la red neuronal para enviar una señal.</p>
+      </article>
+
+      <!-- ======================================================================
+           SECCIÓN 1: CONCEPTO, CARACTERÍSTICAS Y TIPOS DE MACHINE LEARNING
+           ====================================================================== -->
+      <section class="edu-section" id="modulo-fundamentos">
+        <header class="section-header">
+          <div class="section-title-wrap">
+            <span class="section-tag">Módulo 01</span>
+            <h2 class="section-title">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+              </svg>
+              Concepto, Características y Tipos de Machine Learning
+            </h2>
+          </div>
+          <p class="section-description">Fundamentos teóricos esenciales del componente formativo del SENA para
+            comprender cómo aprenden los modelos inteligentes.</p>
+        </header>
+
+        <!-- Definición Oficial -->
+        <article class="definition-box">
+          <h3>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 16v-4M12 8h.01" />
+            </svg>
+            Definición Oficial
+          </h3>
+          <p>
+            Subdisciplina de la Inteligencia Artificial que permite a los sistemas aprender a partir de datos e
+            identificar patrones para hacer predicciones o decisiones sin ser programados explícitamente con reglas
+            fijas.
+          </p>
+        </article>
+
+        <!-- 5 Características Clave -->
+        <h3 class="submodule-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon
+              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+          </svg>
+          5 Características Clave
+        </h3>
+        <div class="characteristics-grid">
+          <article class="char-card">
+            <span class="char-number">01</span>
+            <div class="char-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                <path d="M3 3v5h5" />
+                <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16" />
+                <path d="M16 16h5v5" />
+              </svg>
+            </div>
+            <h4>1) Adaptabilidad</h4>
+            <p>Los modelos se ajustan a nuevos datos y mejoran su precisión con el tiempo.</p>
+          </article>
+          <article class="char-card">
+            <span class="char-number">02</span>
+            <div class="char-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect width="16" height="16" x="4" y="4" rx="2" />
+                <rect width="6" height="6" x="9" y="9" rx="1" />
+                <path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2" />
+              </svg>
+            </div>
+            <h4>2) Automatización</h4>
+            <p>Toma decisiones/predicciones sin necesidad de codificar instrucciones específicas.</p>
+          </article>
+          <article class="char-card">
+            <span class="char-number">03</span>
+            <div class="char-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="m12 14 4-4" />
+                <path d="M3.34 19a10 10 0 1 1 17.32 0" />
+              </svg>
+            </div>
+            <h4>3) Eficiencia</h4>
+            <p>Procesa grandes volúmenes de información en menor tiempo que los humanos.</p>
+          </article>
+          <article class="char-card">
+            <span class="char-number">04</span>
+            <div class="char-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <circle cx="12" cy="12" r="6" />
+                <circle cx="12" cy="12" r="2" />
+              </svg>
+            </div>
+            <h4>4) Generalización</h4>
+            <p>Funciona adecuadamente con datos nuevos, distintos a los del entrenamiento.</p>
+          </article>
+          <article class="char-card">
+            <span class="char-number">05</span>
+            <div class="char-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+                <polyline points="16 7 22 7 22 13" />
+              </svg>
+            </div>
+            <h4>5) Escalabilidad</h4>
+            <p>Aplicable a diferentes contextos, aumentando en tamaño y complejidad según la necesidad.</p>
+          </article>
+        </div>
+
+        <!-- 4 Tipos de Aprendizaje -->
+        <h3 class="submodule-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect width="7" height="7" x="3" y="3" rx="1" />
+            <rect width="7" height="7" x="14" y="3" rx="1" />
+            <rect width="7" height="7" x="14" y="14" rx="1" />
+            <rect width="7" height="7" x="3" y="14" rx="1" />
+          </svg>
+          4 Tipos de Aprendizaje
+        </h3>
+        <div class="types-grid">
+          <article class="type-card type-supervisado">
+            <div class="type-header">
+              <span class="type-badge">Etiquetado</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                <polyline points="22 4 12 14.01 9 11.01" />
+              </svg>
+            </div>
+            <h4>a) Supervisado</h4>
+            <p>Entrenamiento con datos etiquetados (respuesta conocida) para predecir etiquetas en datos nuevos. Incluye
+              Regresión y Clasificación.</p>
+          </article>
+
+          <article class="type-card type-nosupervisado">
+            <div class="type-header">
+              <span class="type-badge">Sin Etiquetas</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3" />
+                <circle cx="19" cy="5" r="2" />
+                <circle cx="5" cy="19" r="2" />
+              </svg>
+            </div>
+            <h4>b) No Supervisado</h4>
+            <p>Trabaja con datos sin etiquetas para descubrir estructuras/patrones ocultos (ej.
+              Clustering/agrupamiento).</p>
+          </article>
+
+          <article class="type-card type-semisupervisado">
+            <div class="type-header">
+              <span class="type-badge">Híbrido</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M16 3h5v5M4 20L20.2 3.8M21 16v5h-5M15 15l5.1 5.1M4 4l5 5" />
+              </svg>
+            </div>
+            <h4>c) Semi-supervisado</h4>
+            <p>Combina pocos datos etiquetados con una gran cantidad de datos no etiquetados (reduce costos de
+              etiquetado).</p>
+          </article>
+
+          <article class="type-card type-refuerzo">
+            <div class="type-header">
+              <span class="type-badge">Recompensa</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+              </svg>
+            </div>
+            <h4>d) Por Refuerzo</h4>
+            <p>El algoritmo aprende por prueba y error interactuando con un entorno, recibiendo recompensas o
+              penalizaciones para maximizar una función objetivo (robótica, videojuegos, navegación autónoma).</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SECCIÓN 2: PRINCIPALES ALGORITMOS (SISTEMA DE PESTAÑAS + BUSCADOR)
+           ====================================================================== -->
+      <section class="edu-section" id="modulo-algoritmos">
+        <header class="section-header">
+          <div class="section-title-wrap">
+            <span class="section-tag">Módulo 02</span>
+            <h2 class="section-title">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="16 18 22 12 16 6" />
+                <polyline points="8 6 2 12 8 18" />
+              </svg>
+              Principales Algoritmos de Machine Learning
+            </h2>
+          </div>
+          <p class="section-description">Catálogo completo de algoritmos clasificados por paradigma de aprendizaje según
+            el componente formativo SENA.</p>
+        </header>
+
+        <!-- Barra de herramientas: Filtro por pestañas y buscador -->
+        <div class="algo-toolbar">
+          <div class="tabs-nav" role="group" aria-label="Filtrar algoritmos por paradigma">
+            <button type="button" class="tab-btn active" data-filter="all" aria-pressed="true">
+              Todos <span class="tab-count">14</span>
+            </button>
+            <button type="button" class="tab-btn" data-filter="supervisados" aria-pressed="false">
+              Supervisados <span class="tab-count">6</span>
+            </button>
+            <button type="button" class="tab-btn" data-filter="nosupervisados" aria-pressed="false">
+              No Supervisados <span class="tab-count">3</span>
+            </button>
+            <button type="button" class="tab-btn" data-filter="refuerzo" aria-pressed="false">
+              Por Refuerzo <span class="tab-count">2</span>
+            </button>
+            <button type="button" class="tab-btn" data-filter="deeplearning" aria-pressed="false">
+              Redes Neuronales / Deep Learning <span class="tab-count">3</span>
+            </button>
+          </div>
+
+          <!-- Buscador instantáneo -->
+          <div class="algo-search-box">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.3-4.3" />
+            </svg>
+            <input type="text" id="algoSearchInput" placeholder="Buscar algoritmo..."
+              aria-label="Buscar algoritmo por nombre o descripción">
+          </div>
+        </div>
+
+        <!-- Grid dinámico de algoritmos -->
+        <div class="algorithms-grid" id="algorithmsGrid">
+
+          <!-- SUPERVISADOS -->
+          <article class="algorithm-card" data-category="supervisados">
+            <div class="algo-card-category algo-cat-supervisados"><span>●</span> Supervisado</div>
+            <h4>Regresión Lineal</h4>
+            <p>Predice valores numéricos continuos a partir de variables independientes.</p>
+            <div class="algo-tag-list">
+              <span class="algo-tag">Regresión</span>
+              <span class="algo-tag">Continuo</span>
+            </div>
+          </article>
+
+          <article class="algorithm-card" data-category="supervisados">
+            <div class="algo-card-category algo-cat-supervisados"><span>●</span> Supervisado</div>
+            <h4>Regresión Logística</h4>
+            <p>Clasificación binaria (sí/no), predice la probabilidad de pertenecer a una clase.</p>
+            <div class="algo-tag-list">
+              <span class="algo-tag">Clasificación</span>
+              <span class="algo-tag">Binaria</span>
+              <span class="algo-tag">Probabilidad</span>
+            </div>
+          </article>
+
+          <article class="algorithm-card" data-category="supervisados">
+            <div class="algo-card-category algo-cat-supervisados"><span>●</span> Supervisado</div>
+            <h4>Árboles de Decisión</h4>
+            <p>Estructura jerárquica en forma de árbol, fácil de interpretar.</p>
+            <div class="algo-tag-list">
+              <span class="algo-tag">Jerárquico</span>
+              <span class="algo-tag">Interpretable</span>
+            </div>
+          </article>
+
+          <article class="algorithm-card" data-category="supervisados">
+            <div class="algo-card-category algo-cat-supervisados"><span>●</span> Supervisado</div>
+            <h4>Bosques Aleatorios (Random Forest)</h4>
+            <p>Ensamble de múltiples árboles de decisión; ofrece alta precisión y resistencia al sobreajuste
+              (overfitting).</p>
+            <div class="algo-tag-list">
+              <span class="algo-tag">Ensamble</span>
+              <span class="algo-tag">Anti-Overfitting</span>
+              <span class="algo-tag">Alta Precisión</span>
+            </div>
+          </article>
+
+          <article class="algorithm-card" data-category="supervisados">
+            <div class="algo-card-category algo-cat-supervisados"><span>●</span> Supervisado</div>
+            <h4>Máquinas de Soporte Vectorial (SVM)</h4>
+            <p>Eficaces en alta dimensión, separan clases mediante hiperplanos.</p>
+            <div class="algo-tag-list">
+              <span class="algo-tag">Hiperplanos</span>
+              <span class="algo-tag">Alta Dimensión</span>
+            </div>
+          </article>
+
+          <article class="algorithm-card" data-category="supervisados">
+            <div class="algo-card-category algo-cat-supervisados"><span>●</span> Supervisado</div>
+            <h4>K-Vecinos Más Cercanos (KNN)</h4>
+            <p>Clasifica según la mayoría de votos de los vecinos más próximos; sensible a la escala y valores atípicos.
+            </p>
+            <div class="algo-tag-list">
+              <span class="algo-tag">Voto Cercanía</span>
+              <span class="algo-tag">Sensible a Escala</span>
+            </div>
+          </article>
+
+          <!-- NO SUPERVISADOS -->
+          <article class="algorithm-card" data-category="nosupervisados">
+            <div class="algo-card-category algo-cat-nosupervisados"><span>●</span> No Supervisado</div>
+            <h4>K-means</h4>
+            <p>Agrupa datos en K clústeres según la cercanía a centroides ajustados iterativamente.</p>
+            <div class="algo-tag-list">
+              <span class="algo-tag">Clustering</span>
+              <span class="algo-tag">Centroides</span>
+            </div>
+          </article>
+
+          <article class="algorithm-card" data-category="nosupervisados">
+            <div class="algo-card-category algo-cat-nosupervisados"><span>●</span> No Supervisado</div>
+            <h4>Agrupamiento Jerárquico</h4>
+            <p>Construye jerarquías de grupos (ascendente/descendente) visualizables en dendrogramas.</p>
+            <div class="algo-tag-list">
+              <span class="algo-tag">Dendrogramas</span>
+              <span class="algo-tag">Jerarquías</span>
+            </div>
+          </article>
+
+          <article class="algorithm-card" data-category="nosupervisados">
+            <div class="algo-card-category algo-cat-nosupervisados"><span>●</span> No Supervisado</div>
+            <h4>Análisis de Componentes Principales (PCA)</h4>
+            <p>Reduce la dimensionalidad conservando la mayor información posible.</p>
+            <div class="algo-tag-list">
+              <span class="algo-tag">Reducción Dimensión</span>
+              <span class="algo-tag">Varianza</span>
+            </div>
+          </article>
+
+          <!-- POR REFUERZO -->
+          <article class="algorithm-card" data-category="refuerzo">
+            <div class="algo-card-category algo-cat-refuerzo"><span>●</span> Por Refuerzo</div>
+            <h4>Q-learning</h4>
+            <p>Aprende políticas óptimas basadas en recompensas.</p>
+            <div class="algo-tag-list">
+              <span class="algo-tag">Políticas Óptimas</span>
+              <span class="algo-tag">Recompensas</span>
+            </div>
+          </article>
+
+          <article class="algorithm-card" data-category="refuerzo">
+            <div class="algo-card-category algo-cat-refuerzo"><span>●</span> Por Refuerzo</div>
+            <h4>Deep Q-Networks (DQN)</h4>
+            <p>Combina redes neuronales profundas con Q-learning para problemas complejos.</p>
+            <div class="algo-tag-list">
+              <span class="algo-tag">Deep RL</span>
+              <span class="algo-tag">Complejidad</span>
+            </div>
+          </article>
+
+          <!-- REDES NEURONALES Y DEEP LEARNING -->
+          <article class="algorithm-card" data-category="deeplearning">
+            <div class="algo-card-category algo-cat-deeplearning"><span>●</span> Redes Neuronales / Deep Learning</div>
+            <h4>Perceptrón Multicapa (MLP)</h4>
+            <p>Base de redes profundas para modelar relaciones no lineales.</p>
+            <div class="algo-tag-list">
+              <span class="algo-tag">No Lineal</span>
+              <span class="algo-tag">Capas Ocultas</span>
+            </div>
+          </article>
+
+          <article class="algorithm-card" data-category="deeplearning">
+            <div class="algo-card-category algo-cat-deeplearning"><span>●</span> Redes Neuronales / Deep Learning</div>
+            <h4>Redes Neuronales Convolucionales (CNN)</h4>
+            <p>Especializadas en procesamiento de imágenes y patrones espaciales.</p>
+            <div class="algo-tag-list">
+              <span class="algo-tag">Visión Artificial</span>
+              <span class="algo-tag">Imágenes</span>
+            </div>
+          </article>
+
+          <article class="algorithm-card" data-category="deeplearning">
+            <div class="algo-card-category algo-cat-deeplearning"><span>●</span> Redes Neuronales / Deep Learning</div>
+            <h4>Redes Neuronales Recurrentes (RNN)</h4>
+            <p>Procesan secuencias temporales y texto reteniendo información previa.</p>
+            <div class="algo-tag-list">
+              <span class="algo-tag">Secuencias</span>
+              <span class="algo-tag">Series Temporales</span>
+              <span class="algo-tag">Texto</span>
+            </div>
+          </article>
+
+          <!-- Mensaje sin resultados -->
+          <div class="no-results-msg" id="noResultsMsg">
+            No se encontraron algoritmos que coincidan con la búsqueda.
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SECCIÓN 3: HERRAMIENTAS DE ANALÍTICA DE DATOS Y FUNCIONALIDADES
+           ====================================================================== -->
+      <section class="edu-section" id="modulo-herramientas">
+        <header class="section-header">
+          <div class="section-title-wrap">
+            <span class="section-tag">Módulo 03</span>
+            <h2 class="section-title">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path
+                  d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+              </svg>
+              Herramientas de Analítica de Datos y Funcionalidades
+            </h2>
+          </div>
+          <p class="section-description">Capacidades del software de analítica, flujo metodológico y principales
+            plataformas utilizadas en la industria según el SENA.</p>
+        </header>
+
+        <!-- Características de las herramientas -->
+        <h3 class="submodule-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="2" y1="12" x2="22" y2="12" />
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+          </svg>
+          Características de las Herramientas
+        </h3>
+        <div class="tools-subgrid">
+          <article class="feature-card">
+            <h4>Escalabilidad (Big Data)</h4>
+            <p>Capacidad de procesar grandes volúmenes de información y adaptarse al crecimiento de datos empresariales.
+            </p>
+          </article>
+          <article class="feature-card">
+            <h4>Interfaz Gráfica y Dashboards</h4>
+            <p>Paneles visuales e interactivos que facilitan el análisis y la toma de decisiones basada en métricas.</p>
+          </article>
+          <article class="feature-card">
+            <h4>Compatibilidad Multifuente</h4>
+            <p>Integración con bases de datos SQL/NoSQL, archivos planos (CSV, Excel) y servicios web mediante APIs.</p>
+          </article>
+          <article class="feature-card">
+            <h4>Automatización e Integración</h4>
+            <p>Automatización de procesos repetitivos e integración fluida con lenguajes especializados como Python y R.
+            </p>
+          </article>
+        </div>
+
+        <!-- Funcionalidades Clave: Pipeline del Dato -->
+        <div class="pipeline-wrapper">
+          <div class="pipeline-header">
+            <h3>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="6" y1="3" x2="6" y2="15" />
+                <circle cx="18" cy="6" r="3" />
+                <circle cx="6" cy="18" r="3" />
+                <path d="M18 9a9 9 0 0 1-9 9" />
+              </svg>
+              Funcionalidades Clave del Pipeline
+            </h3>
+            <p>Etapas obligatorias de la analítica de datos en el ciclo de vida del software.</p>
+          </div>
+          <!-- El dato recorre las 5 etapas cuando el pipeline entra en pantalla -->
+          <div class="pipeline-progress" aria-hidden="true"><span></span></div>
+          <div class="pipeline-steps">
+            <div class="pipeline-step">
+              <span class="step-number">1</span>
+              <h4>Carga y Transformación (ETL)</h4>
+              <p>Extracción, limpieza, estandarización y carga eficiente de datos procedentes de diversos orígenes.</p>
+            </div>
+            <div class="pipeline-step">
+              <span class="step-number">2</span>
+              <h4>Análisis Descriptivo y Diagnóstico</h4>
+              <p>Identificación de qué ocurrió en el pasado y comprensión de las causas subyacentes de los eventos.</p>
+            </div>
+            <div class="pipeline-step">
+              <span class="step-number">3</span>
+              <h4>Análisis Predictivo y Prescriptivo</h4>
+              <p>Estimación de comportamientos futuros y formulación de acciones recomendadas con modelos de ML.</p>
+            </div>
+            <div class="pipeline-step">
+              <span class="step-number">4</span>
+              <h4>Visualización Interactiva</h4>
+              <p>Presentación gráfica de métricas mediante gráficos dinámicos, mapas de calor y reportes vivos.</p>
+            </div>
+            <div class="pipeline-step">
+              <span class="step-number">5</span>
+              <h4>Colaboración y Trazabilidad</h4>
+              <p>Trabajo en equipo, control de cambios de pipelines y auditoría integral del tratamiento de datos.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Herramientas Principales -->
+        <h3 class="submodule-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect width="18" height="18" x="3" y="3" rx="2" />
+            <path d="M3 9h18M9 21V9" />
+          </svg>
+          Herramientas Principales
+        </h3>
+        <div class="tools-catalog-grid">
+          <article class="tool-item-card">
+            <div class="tool-item-header">
+              <span class="tool-name">Power BI</span>
+              <span class="tool-vendor">Microsoft</span>
+            </div>
+            <p>Plataforma líder para creación de dashboards corporativos, modelado de datos e inteligencia de negocios.
+            </p>
+          </article>
+
+          <article class="tool-item-card">
+            <div class="tool-item-header">
+              <span class="tool-name">R y RStudio</span>
+              <span class="tool-vendor">Open Source</span>
+            </div>
+            <p>Entorno especializado en estadística cuantitativa, computación científica y visualizaciones gráficas
+              avanzadas.</p>
+          </article>
+
+          <article class="tool-item-card">
+            <div class="tool-item-header">
+              <span class="tool-name">Tableau</span>
+              <span class="tool-vendor">Salesforce</span>
+            </div>
+            <p>Herramienta diseñada para el descubrimiento de insights visuales rápidos mediante análisis exploratorio
+              ágil.</p>
+          </article>
+
+          <article class="tool-item-card">
+            <div class="tool-item-header">
+              <span class="tool-name">RapidMiner</span>
+              <span class="tool-vendor">Altair</span>
+            </div>
+            <p>Plataforma para diseñar flujos de trabajo visuales de Machine Learning sin necesidad de programación
+              intensiva.</p>
+          </article>
+
+          <article class="tool-item-card">
+            <div class="tool-item-header">
+              <span class="tool-name">Python</span>
+              <span class="tool-vendor">Ecosistema ML</span>
+            </div>
+            <p>Lenguaje por excelencia con librerías estándar: <strong>Pandas</strong>, <strong>NumPy</strong>,
+              <strong>Scikit-learn</strong> y <strong>Matplotlib</strong>.
+            </p>
+          </article>
+
+          <article class="tool-item-card">
+            <div class="tool-item-header">
+              <span class="tool-name">Google Data Studio</span>
+              <span class="tool-vendor">Google Cloud</span>
+            </div>
+            <p>Generación de reportes dinámicos e interactivos en la nube con conexión nativa a múltiples fuentes web.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SECCIÓN 4: CLUSTERING Y GESTIÓN DE DATOS
+           ====================================================================== -->
+      <section class="edu-section" id="modulo-clustering">
+        <header class="section-header">
+          <div class="section-title-wrap">
+            <span class="section-tag">Módulo 04</span>
+            <h2 class="section-title">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="6" cy="6" r="3" />
+                <circle cx="6" cy="18" r="3" />
+                <line x1="20" y1="4" x2="8.12" y2="15.88" />
+                <line x1="14.47" y1="14.48" x2="20" y2="20" />
+                <circle cx="18" cy="6" r="3" />
+              </svg>
+              Agrupamiento de Datos (Clustering) y su Gestión
+            </h2>
+          </div>
+          <p class="section-description">Modelos de agrupamiento no supervisado y buenas prácticas de gobierno de datos
+            establecidas en el currículo SENA.</p>
+        </header>
+
+        <!-- Algoritmos de Agrupamiento -->
+        <h3 class="submodule-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" />
+            <path d="m4.93 4.93 4.24 4.24" />
+            <path d="m14.83 9.17 4.24-4.24" />
+            <path d="m14.83 14.83 4.24 4.24" />
+            <path d="m9.17 14.83-4.24 4.24" />
+          </svg>
+          Algoritmos de Agrupamiento (Clustering)
+        </h3>
+        <div class="clustering-grid">
+          <article class="cluster-card">
+            <span class="cluster-badge">Por Centroides</span>
+            <h4>K-means</h4>
+            <p>Agrupa datos en K clústeres calculando la distancia media hacia centroides actualizados iterativamente
+              hasta converger.</p>
+          </article>
+
+          <article class="cluster-card">
+            <span class="cluster-badge">Basado en Densidad</span>
+            <h4>DBSCAN</h4>
+            <p>Basado en densidad de puntos; identifica y maneja eficazmente formas arbitrarias de grupos y filtra ruido
+              o valores atípicos (outliers).</p>
+          </article>
+
+          <article class="cluster-card">
+            <span class="cluster-badge">Estructura de Árbol</span>
+            <h4>Hierarchical Clustering</h4>
+            <p>Construye particiones jerárquicas en esquemas aglomerativos (ascendentes) o divisivos (descendentes),
+              representables en dendrogramas.</p>
+          </article>
+        </div>
+
+        <!-- Laboratorio en vivo: K-means paso a paso (js/kmeans-demo.js) -->
+        <div class="ml-lab" id="kmeansLab">
+          <div class="ml-lab-header">
+            <div class="ml-lab-intro">
+              <span class="lab-badge">Laboratorio en vivo</span>
+              <h3>K-means paso a paso</h3>
+              <p>Cada iteración hace dos cosas: <strong>asigna</strong> cada punto al centroide más cercano y
+                <strong>mueve</strong> cada centroide al promedio de sus puntos. Haz clic en el lienzo para agregar datos.
+              </p>
+            </div>
+            <div class="lab-stats" aria-live="polite">
+              <div class="lab-stat">
+                <span class="lab-stat-label">Iteración</span>
+                <span class="lab-stat-value" id="kmIter">0</span>
+              </div>
+              <div class="lab-stat">
+                <span class="lab-stat-label">Inercia</span>
+                <span class="lab-stat-value" id="kmInertia">—</span>
+              </div>
+            </div>
+          </div>
+          <div class="kmeans-stage">
+            <canvas id="kmeansCanvas" role="img"
+              aria-label="Gráfico de dispersión donde K-means agrupa puntos alrededor de centroides"></canvas>
+          </div>
+          <p class="lab-phase" id="kmPhase" aria-live="polite">Los centroides empiezan en puntos al azar. Pulsa
+            «Siguiente paso» para asignar los puntos.</p>
+          <div class="lab-controls">
+            <label class="lab-k" for="kmK">K = <output id="kmKValue" for="kmK">3</output>
+              <input type="range" id="kmK" min="2" max="6" value="3">
+            </label>
+            <button type="button" class="lab-btn" id="kmStep">Siguiente paso</button>
+            <button type="button" class="lab-btn lab-btn-primary" id="kmRun">Ejecutar hasta converger</button>
+            <button type="button" class="lab-btn" id="kmReset">Reiniciar centroides</button>
+            <button type="button" class="lab-btn" id="kmNewData">Generar datos nuevos</button>
+          </div>
+        </div>
+
+        <!-- Técnicas de Gestión de Datos -->
+        <h3 class="submodule-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path
+              d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+          </svg>
+          Técnicas de Gestión de Datos
+        </h3>
+        <div class="data-mgmt-grid">
+          <article class="mgmt-card">
+            <div class="mgmt-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M2 14h4M10 8h4M18 16h4" />
+              </svg>
+            </div>
+            <h4>Normalización / Estandarización</h4>
+            <p>Ajuste de escalas en variables numéricas para evitar que magnitudes dispares distorsionen los cálculos
+              del modelo.</p>
+          </article>
+
+          <article class="mgmt-card">
+            <div class="mgmt-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="6" y1="3" x2="6" y2="15" />
+                <circle cx="18" cy="6" r="3" />
+                <circle cx="6" cy="18" r="3" />
+                <path d="M18 9a9 9 0 0 1-9 9" />
+              </svg>
+            </div>
+            <h4>Control de Versiones de Datos</h4>
+            <p>Rastreo histórico de transformaciones y versiones de datasets para garantizar la reproducibilidad de
+              experimentos.</p>
+          </article>
+
+          <article class="mgmt-card">
+            <div class="mgmt-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2H2v10l9.29 9.29a1 1 0 0 0 1.41 0l8.59-8.59a1 1 0 0 0 0-1.41Z" />
+                <circle cx="7" cy="7" r="1.5" />
+              </svg>
+            </div>
+            <h4>Catalogación y Metadatos</h4>
+            <p>Indexación estructurada y documentación de orígenes, tipos, relaciones y significados del catálogo de
+              datos.</p>
+          </article>
+
+          <article class="mgmt-card">
+            <div class="mgmt-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                <path d="m9 12 2 2 4-4" />
+              </svg>
+            </div>
+            <h4>Gobierno de Datos</h4>
+            <p>Políticas de seguridad, privacidad, control de accesos y cumplimiento de normativas de protección de
+              información.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SECCIÓN 5: EVALUACIÓN DE MODELOS Y VALIDACIÓN
+           ====================================================================== -->
+      <section class="edu-section" id="modulo-evaluacion">
+        <header class="section-header">
+          <div class="section-title-wrap">
+            <span class="section-tag">Módulo 05</span>
+            <h2 class="section-title">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+              </svg>
+              Evaluación de Modelos y Validación
+            </h2>
+          </div>
+          <p class="section-description">Métricas de desempeño para clasificación y regresión, junto a metodologías de
+            partición sin sesgo de entrenamiento.</p>
+        </header>
+
+        <!-- Acordeón Interactivo de Métricas de Evaluación -->
+        <h3 class="submodule-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
+          Métricas de Evaluación (Haz clic para expandir)
+        </h3>
+        <div class="accordion-container" id="metricsAccordion">
+
+          <!-- Métrica 1 -->
+          <article class="accordion-item active">
+            <button class="accordion-header" aria-expanded="true">
+              <div class="accordion-title-left">
+                <span class="metric-pill">Métrica 1</span>
+                <span>Precisión Global (Accuracy)</span>
+              </div>
+              <span class="accordion-icon">▼</span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-content">
+                <p><strong>Definición:</strong> Proporción de predicciones correctas sobre el total de casos evaluados.
+                </p>
+                <div class="formula-tag">Accuracy = Predicciones Correctas / Total de Predicciones</div>
+                <p><strong>Uso clave:</strong> Funciona óptimamente cuando las clases están balanceadas. Si existe
+                  desbalance significativo, puede arrojar conclusiones engañosas.</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Métrica 2 -->
+          <article class="accordion-item">
+            <button class="accordion-header" aria-expanded="false">
+              <div class="accordion-title-left">
+                <span class="metric-pill">Métrica 2</span>
+                <span>Precisión (Precision) y Sensibilidad (Recall)</span>
+              </div>
+              <span class="accordion-icon">▼</span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-content">
+                <p><strong>Definición Oficial SENA:</strong></p>
+                <div class="formula-tag">Precisión = Verdaderos Positivos / Positivos Predichos</div>
+                <p>Indica la calidad de las predicciones positivas: de lo que el modelo predijo positivo, cuántos
+                  realmente lo eran.</p>
+                <div class="formula-tag">Recall = Verdaderos Positivos / Positivos Reales</div>
+                <p>Mide la exhaustividad: qué porcentaje de los casos positivos reales logró detectar el modelo.</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Métrica 3 -->
+          <article class="accordion-item">
+            <button class="accordion-header" aria-expanded="false">
+              <div class="accordion-title-left">
+                <span class="metric-pill">Métrica 3</span>
+                <span>F1-Score</span>
+              </div>
+              <span class="accordion-icon">▼</span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-content">
+                <p><strong>Definición:</strong> Media armónica entre la Precisión y la Sensibilidad (Recall).</p>
+                <div class="formula-tag">F1-Score = 2 × (Precisión × Recall) / (Precisión + Recall)</div>
+                <p><strong>Uso clave:</strong> Es la métrica ideal cuando se trabaja con conjuntos de datos donde las
+                  clases están desbalanceadas, equilibrando falsos positivos y falsos negativos.</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Métrica 4 -->
+          <article class="accordion-item">
+            <button class="accordion-header" aria-expanded="false">
+              <div class="accordion-title-left">
+                <span class="metric-pill">Métrica 4</span>
+                <span>AUC-ROC</span>
+              </div>
+              <span class="accordion-icon">▼</span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-content">
+                <p><strong>Definición:</strong> Mide la capacidad integral del modelo para distinguir y discriminar
+                  entre clases en diferentes umbrales de decisión.</p>
+                <div class="formula-tag">AUC ∈ [0, 1] (0.5 equivale a adivinar al azar; cerca de 1 indica excelente
+                  capacidad de separación)</div>
+                <p>Permite evaluar el equilibrio entre la tasa de verdaderos positivos y la tasa de falsos positivos.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Métrica 5 -->
+          <article class="accordion-item">
+            <button class="accordion-header" aria-expanded="false">
+              <div class="accordion-title-left">
+                <span class="metric-pill">Métrica 5</span>
+                <span>Error Cuadrático Medio (MSE) y RMSE</span>
+              </div>
+              <span class="accordion-icon">▼</span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-content">
+                <p><strong>Definición:</strong> Mide las diferencias cuantitativas entre los valores predichos por el
+                  modelo y los valores reales en problemas de regresión continua.</p>
+                <div class="formula-tag">MSE = Promedio((Valor Real - Valor Predicho)²)</div>
+                <p>El <strong>RMSE</strong> (Raíz del MSE) penaliza con fuerza los errores de gran magnitud y se expresa
+                  en las mismas unidades de la variable objetivo.</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Métrica 6 -->
+          <article class="accordion-item">
+            <button class="accordion-header" aria-expanded="false">
+              <div class="accordion-title-left">
+                <span class="metric-pill">Métrica 6</span>
+                <span>Coeficiente de Determinación (R²)</span>
+              </div>
+              <span class="accordion-icon">▼</span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-content">
+                <p><strong>Definición:</strong> Indica la proporción o porcentaje en que el modelo explica la
+                  variabilidad de los datos reales observados.</p>
+                <div class="formula-tag">R² ≤ 1.0 (Un valor cercano a 1 indica excelente ajuste predictivo)</div>
+                <p>Métrica fundamental para cuantificar la bondad de ajuste en modelos de regresión.</p>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Laboratorio en vivo: Matriz de confusión (js/confusion-matrix.js) -->
+        <div class="ml-lab" id="cmLab">
+          <div class="ml-lab-header">
+            <div class="ml-lab-intro">
+              <span class="lab-badge">Laboratorio en vivo</span>
+              <h3>Matriz de confusión interactiva</h3>
+              <p>Mueve los controles y mira cómo cambian las métricas. Prueba el caso del detector de fraude: el
+                Accuracy parece excelente, pero el modelo casi no encuentra fraudes.</p>
+            </div>
+          </div>
+
+          <div class="cm-presets" role="group" aria-label="Escenarios de ejemplo">
+            <button type="button" class="cm-preset" data-preset="balanceado" aria-pressed="false">Clases balanceadas</button>
+            <button type="button" class="cm-preset" data-preset="fraude" aria-pressed="false">Detector de fraude</button>
+            <button type="button" class="cm-preset" data-preset="alarmas" aria-pressed="false">Alarma muy sensible</button>
+          </div>
+
+          <div class="cm-layout">
+            <div class="cm-matrix">
+              <span class="cm-corner" aria-hidden="true"></span>
+              <span class="cm-axis">Predice positivo</span>
+              <span class="cm-axis">Predice negativo</span>
+
+              <span class="cm-axis cm-axis-row">Realmente positivo</span>
+              <label class="cm-cell is-hit" data-cell="tp">
+                <span class="cm-cell-label">VP</span>
+                <span class="cm-cell-name">Verdaderos positivos</span>
+                <output class="cm-cell-value">0</output>
+                <input type="range" min="0" max="1000" value="0" aria-label="Verdaderos positivos">
+              </label>
+              <label class="cm-cell is-miss" data-cell="fn">
+                <span class="cm-cell-label">FN</span>
+                <span class="cm-cell-name">Falsos negativos</span>
+                <output class="cm-cell-value">0</output>
+                <input type="range" min="0" max="1000" value="0" aria-label="Falsos negativos">
+              </label>
+
+              <span class="cm-axis cm-axis-row">Realmente negativo</span>
+              <label class="cm-cell is-miss" data-cell="fp">
+                <span class="cm-cell-label">FP</span>
+                <span class="cm-cell-name">Falsos positivos</span>
+                <output class="cm-cell-value">0</output>
+                <input type="range" min="0" max="1000" value="0" aria-label="Falsos positivos">
+              </label>
+              <label class="cm-cell is-hit" data-cell="tn">
+                <span class="cm-cell-label">VN</span>
+                <span class="cm-cell-name">Verdaderos negativos</span>
+                <output class="cm-cell-value">0</output>
+                <input type="range" min="0" max="1000" value="0" aria-label="Verdaderos negativos">
+              </label>
+            </div>
+
+            <div class="cm-metrics">
+              <div class="cm-metric" data-metric="accuracy">
+                <div class="cm-metric-head">
+                  <span class="cm-metric-name">Accuracy</span>
+                  <span class="cm-metric-value">—</span>
+                </div>
+                <span class="cm-metric-formula">(VP + VN) / Total</span>
+                <div class="cm-bar"><span></span></div>
+              </div>
+              <div class="cm-metric" data-metric="precision">
+                <div class="cm-metric-head">
+                  <span class="cm-metric-name">Precision</span>
+                  <span class="cm-metric-value">—</span>
+                </div>
+                <span class="cm-metric-formula">VP / (VP + FP)</span>
+                <div class="cm-bar"><span></span></div>
+              </div>
+              <div class="cm-metric" data-metric="recall">
+                <div class="cm-metric-head">
+                  <span class="cm-metric-name">Recall</span>
+                  <span class="cm-metric-value">—</span>
+                </div>
+                <span class="cm-metric-formula">VP / (VP + FN)</span>
+                <div class="cm-bar"><span></span></div>
+              </div>
+              <div class="cm-metric is-f1" data-metric="f1">
+                <div class="cm-metric-head">
+                  <span class="cm-metric-name">F1-Score</span>
+                  <span class="cm-metric-value">—</span>
+                </div>
+                <span class="cm-metric-formula">2 × (Precision × Recall) / (Precision + Recall)</span>
+                <div class="cm-bar"><span></span></div>
+              </div>
+              <p class="cm-balance" id="cmBalance"></p>
+              <p class="cm-insight" id="cmInsight" aria-live="polite"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Técnicas de Validación -->
+        <h3 class="submodule-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          </svg>
+          Técnicas de Validación
+        </h3>
+        <div class="validation-grid">
+          <article class="val-card">
+            <span class="val-badge">Partición K-Folds</span>
+            <h4>Validación Cruzada (Cross-Validation)</h4>
+            <p>Divide los datos en K pliegues (folds) homogéneos para entrenar y evaluar el modelo K veces, asegurando
+              que cada registro sea evaluado independientemente.</p>
+          </article>
+
+          <article class="val-card">
+            <span class="val-badge">Esquema Clásico</span>
+            <h4>División Train / Validation / Test</h4>
+            <p>Separa el conjunto de datos en tres subconjuntos independientes: entrenamiento (ajuste), validación
+              (hiperparámetros) y prueba (evaluación final sin sesgos).</p>
+          </article>
+
+          <article class="val-card">
+            <span class="val-badge">Preservación Proporcional</span>
+            <h4>Validación Estratificada</h4>
+            <p>Mantiene la proporción exacta de las clases original en cada subconjunto o pliegue, indispensable en
+              problemas con clases desbalanceadas.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SECCIÓN 6: MÓDULO DE AUTOEVALUACIÓN (QUIZ INTERACTIVO ADSO)
+           ====================================================================== -->
+      <section class="edu-section" id="modulo-autoevaluacion">
+        <header class="section-header">
+          <div class="section-title-wrap">
+            <span class="section-tag">Autoevaluación Formativa</span>
+            <h2 class="section-title">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+              </svg>
+              Comprueba tus Conocimientos (Quiz Interactivo)
+            </h2>
+          </div>
+          <p class="section-description">Responde las siguientes 5 preguntas de selección múltiple basadas rigurosamente
+            en el contenido técnico oficial del SENA y recibe retroalimentación inmediata.</p>
+        </header>
+
+        <div class="quiz-container">
+          <!-- Barra de puntuación -->
+          <div class="quiz-header-bar">
+            <div>
+              <strong>Progreso del Quiz:</strong>
+              <span id="quizAnsweredCount">0</span> de 5 preguntas respondidas
+            </div>
+            <div class="quiz-score-badge">
+              Calificación: <span class="score-highlight" id="quizScoreDisplay">0.0</span> / 5.0
+            </div>
+          </div>
+
+          <!-- Pregunta 1 -->
+          <article class="quiz-question-card" data-qindex="1">
+            <h3 class="quiz-question-title">
+              <span class="question-idx">01</span>
+              <span>¿Cuál es la definición oficial de Machine Learning según el OVA?</span>
+            </h3>
+            <div class="quiz-options">
+              <label class="quiz-option-label" data-correct="false">
+                <input type="radio" name="q1" value="A">
+                <span>A) Técnica de programación estructurada que utiliza sentencias if-else fijas para automatizar
+                  bases de datos.</span>
+              </label>
+              <label class="quiz-option-label" data-correct="true">
+                <input type="radio" name="q1" value="B">
+                <span>B) Subdisciplina de la Inteligencia Artificial que permite a los sistemas aprender a partir de
+                  datos e identificar patrones para hacer predicciones o decisiones sin ser programados explícitamente
+                  con reglas fijas.</span>
+              </label>
+              <label class="quiz-option-label" data-correct="false">
+                <input type="radio" name="q1" value="C">
+                <span>C) Sistema informático exclusivo para el diseño de interfaces web reactivas y almacenamiento
+                  NoSQL.</span>
+              </label>
+            </div>
+            <div class="quiz-feedback" id="feedback-q1"></div>
+          </article>
+
+          <!-- Pregunta 2 -->
+          <article class="quiz-question-card" data-qindex="2">
+            <h3 class="quiz-question-title">
+              <span class="question-idx">02</span>
+              <span>¿Qué característica clave permite a un modelo funcionar adecuadamente con datos nuevos, distintos a
+                los del entrenamiento?</span>
+            </h3>
+            <div class="quiz-options">
+              <label class="quiz-option-label" data-correct="false">
+                <input type="radio" name="q2" value="A">
+                <span>A) Eficiencia.</span>
+              </label>
+              <label class="quiz-option-label" data-correct="true">
+                <input type="radio" name="q2" value="B">
+                <span>B) Generalización.</span>
+              </label>
+              <label class="quiz-option-label" data-correct="false">
+                <input type="radio" name="q2" value="C">
+                <span>C) Escalabilidad.</span>
+              </label>
+            </div>
+            <div class="quiz-feedback" id="feedback-q2"></div>
+          </article>
+
+          <!-- Pregunta 3 -->
+          <article class="quiz-question-card" data-qindex="3">
+            <h3 class="quiz-question-title">
+              <span class="question-idx">03</span>
+              <span>Si se requiere un algoritmo de clustering capaz de manejar formas arbitrarias y filtrar ruido o
+                valores atípicos, ¿cuál es el indicado?</span>
+            </h3>
+            <div class="quiz-options">
+              <label class="quiz-option-label" data-correct="false">
+                <input type="radio" name="q3" value="A">
+                <span>A) K-means (por centroides iterativos).</span>
+              </label>
+              <label class="quiz-option-label" data-correct="true">
+                <input type="radio" name="q3" value="B">
+                <span>B) DBSCAN (basado en densidad).</span>
+              </label>
+              <label class="quiz-option-label" data-correct="false">
+                <input type="radio" name="q3" value="C">
+                <span>C) Regresión Lineal multivariable.</span>
+              </label>
+            </div>
+            <div class="quiz-feedback" id="feedback-q3"></div>
+          </article>
+
+          <!-- Pregunta 4 -->
+          <article class="quiz-question-card" data-qindex="4">
+            <h3 class="quiz-question-title">
+              <span class="question-idx">04</span>
+              <span>¿Por qué es fundamental utilizar la métrica F1-Score en conjuntos de datos con clases
+                desbalanceadas?</span>
+            </h3>
+            <div class="quiz-options">
+              <label class="quiz-option-label" data-correct="true">
+                <input type="radio" name="q4" value="A">
+                <span>A) Porque es la media armónica entre Precisión y Recall, equilibrando la detección y los falsos
+                  positivos.</span>
+              </label>
+              <label class="quiz-option-label" data-correct="false">
+                <input type="radio" name="q4" value="B">
+                <span>B) Porque calcula únicamente los residuos cuadráticos de variables continuas de regresión.</span>
+              </label>
+              <label class="quiz-option-label" data-correct="false">
+                <input type="radio" name="q4" value="C">
+                <span>C) Porque sustituye la necesidad de realizar validación cruzada.</span>
+              </label>
+            </div>
+            <div class="quiz-feedback" id="feedback-q4"></div>
+          </article>
+
+          <!-- Pregunta 5 -->
+          <article class="quiz-question-card" data-qindex="5">
+            <h3 class="quiz-question-title">
+              <span class="question-idx">05</span>
+              <span>¿En qué consiste la técnica de Validación Estratificada según el currículo SENA?</span>
+            </h3>
+            <div class="quiz-options">
+              <label class="quiz-option-label" data-correct="false">
+                <input type="radio" name="q5" value="A">
+                <span>A) En descartar todos los valores nulos o vacíos antes de entrenar el modelo.</span>
+              </label>
+              <label class="quiz-option-label" data-correct="true">
+                <input type="radio" name="q5" value="B">
+                <span>B) En mantener la proporción de clases original en cada subconjunto (partición o fold).</span>
+              </label>
+              <label class="quiz-option-label" data-correct="false">
+                <input type="radio" name="q5" value="C">
+                <span>C) En entrenar el modelo exclusivamente con datos no etiquetados.</span>
+              </label>
+            </div>
+            <div class="quiz-feedback" id="feedback-q5"></div>
+          </article>
+
+          <!-- Resultado final: aparece al responder las 5 preguntas -->
+          <div class="quiz-result" id="quizResult" hidden aria-live="polite">
+            <div class="quiz-result-ring">
+              <svg viewBox="0 0 120 120" aria-hidden="true">
+                <circle class="ring-bg" cx="60" cy="60" r="52" />
+                <circle class="ring-fill" id="quizRingFill" cx="60" cy="60" r="52" />
+              </svg>
+              <div class="quiz-result-score"><span id="quizResultScore">0.0</span><small>de 5.0</small></div>
+            </div>
+            <div class="quiz-result-text">
+              <h3 id="quizResultTitle"></h3>
+              <p id="quizResultMsg"></p>
+            </div>
+          </div>
+
+          <!-- Botón de reinicio del Quiz -->
+          <div class="quiz-actions">
+            <button type="button" class="btn-reset-quiz" id="btnResetQuiz">
+              Reiniciar Autoevaluación
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ======================================================================
+       FOOTER INSTITUCIONAL SENA
+       ====================================================================== -->
+  <footer class="site-footer">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <h3>SENA · <span>ADSO</span></h3>
+        <p>Servicio Nacional de Aprendizaje. Centro de Servicios Empresariales y Turísticos (CSET) / Tecnólogo en
+          Análisis y Desarrollo de Software. Material formativo interactivo desarrollado para fortalecer competencias en
+          analítica y Machine Learning.</p>
+      </div>
+
+      <div class="footer-links-col">
+        <h4>Módulos Temáticos</h4>
+        <ul>
+          <li><a href="#modulo-fundamentos">1. Concepto y Tipos</a></li>
+          <li><a href="#modulo-algoritmos">2. Catálogo de Algoritmos</a></li>
+          <li><a href="#modulo-herramientas">3. Herramientas de Analítica</a></li>
+          <li><a href="#modulo-clustering">4. Clustering y Datos</a></li>
+          <li><a href="#modulo-evaluacion">5. Evaluación y Validación</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-col">
+        <h4>Identidad del Proyecto</h4>
+        <ul>
+          <li><a href="#portada">Componente 6 Machine Learning</a></li>
+          <li><a href="#modulo-autoevaluacion">Autoevaluación Formativa</a></li>
+          <li><a href="#portada">Equipo de Desarrollo: GAES 6</a></li>
+          <li><a href="https://www.sena.edu.co" target="_blank" rel="noopener noreferrer">SENA Colombia (sitio oficial)</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 <strong>SENA - Análisis y Desarrollo de Software (ADSO)</strong>. Proyecto pedagógico desarrollado
+        por GAES 6. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+</body>
+
+</html>
